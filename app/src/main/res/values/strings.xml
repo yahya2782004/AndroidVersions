@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">AndroidVersions</string>
+    <string name="eclair">Eclair</string>
+    <string name="eclair_version">2.0 – 2.1</string>
+    <string name="ice_cream_sandwich">Ice Cream Sandwich</string>
+    <string name="ice_cream_version">4.0 – 4.0.4</string>
+    <string name="honeycomb">Honeycomb</string>
+    <string name="honeycomb_version">3.0 – 3.2.6</string>
+    <string name="jelly_bean">Jelly Bean</string>
+    <string name="jelly_bean_version">4.1 – 4.3.1</string>
+    <string name="kitkat">KitKat</string>
+    <string name="kitkat_version">4.4 – 4.4.4</string>
+    <string name="lollipop">Lollipop</string>
+    <string name="lollipop_version">5.0 – 5.1.1</string>
+    <string name="donut">Donut</string>
+    <string name="donut_version">1.6</string>
+    <string name="froyo">Froyo</string>
+    <string name="froyo_version">2.2 – 2.2.3</string>
+    <string name="gingerbread">Gingerbread</string>
+    <string name="gingerbread_version">2.3 – 2.3.7</string>
+    <string name="nougat">Nougat</string>
+    <string name="nougat_version">7.0 – 7.1.2</string>
+    <string name="oreo">Oreo</string>
+    <string name="oreo_version">8.0 – 8.1</string>
+    <string name="marshmallow">Marshmallow</string>
+    <string name="marshmallow_version">6.0 – 6.0.1</string>
 </resources>

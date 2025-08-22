@@ -18,28 +18,35 @@ import java.util.ArrayList;
 
 import models.AndroidVersion;
 
-public class AndoidVersionAdapter extends RecyclerView.Adapter <AndoidVersionAdapter.AndoidVersionViewHolder> {
+public class AndroidVersionAdapter extends RecyclerView.Adapter <AndroidVersionAdapter.AndroidVersionViewHolder> {
+    //Context from the activity
     private Context context;
+    // Data
     private ArrayList<AndroidVersion> androidVersionList;
-    public AndoidVersionAdapter(Context context, ArrayList<AndroidVersion> androidVersionList) {
+
+    //Constructor: passes context and data list into the adapter
+    public AndroidVersionAdapter(Context context, ArrayList<AndroidVersion> androidVersionList) {
         this.context = context;
         this.androidVersionList = androidVersionList;
     }
 
     @NonNull
     @Override
-    public AndoidVersionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AndroidVersionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Inflate item layout using ViewBinding and retuen as AndroidVersionViewHolder
         AndroidVersionsItemBinding itemBinding = AndroidVersionsItemBinding.inflate(LayoutInflater.from(context), parent, false);
-        return new AndoidVersionViewHolder(itemBinding);
+        return new AndroidVersionViewHolder(itemBinding);
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull AndoidVersionViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AndroidVersionViewHolder holder, int position) {
+        //Bind the data at this position to the UI components
         holder.itemBinding.tvName.setText(androidVersionList.get(position).getCodeName());
         holder.itemBinding.tvNumber.setText(androidVersionList.get(position).getVersion());
         holder.itemBinding.ivLogo.setImageResource(androidVersionList.get(position).getImageResId());
 
+        //Alternate background colors for even/odd rows
         if(holder.getAdapterPosition() % 2 == 0){
             holder.itemBinding.cvItem.setBackgroundColor(
                     ContextCompat.getColor(context, R.color.evenItem));
@@ -48,9 +55,11 @@ public class AndoidVersionAdapter extends RecyclerView.Adapter <AndoidVersionAda
                     ContextCompat.getColor(context, R.color.oddItem));
         }
 
+        //Click listener for each item in the list
         holder.itemBinding.cvItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Show a Toast with the selected Android version details
                 String msg = " \"You selected: " + androidVersionList.get(holder.getAdapterPosition()).getCodeName()
                         + " (" + androidVersionList.get(holder.getAdapterPosition()).getVersion() + ")\".";
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
@@ -61,13 +70,14 @@ public class AndoidVersionAdapter extends RecyclerView.Adapter <AndoidVersionAda
 
     @Override
     public int getItemCount() {
+        //Total number of items in the list
         return  androidVersionList.size();
     }
 
-    public class AndoidVersionViewHolder extends RecyclerView.ViewHolder{
+    //ViewHolder to access the item elements
+    public class AndroidVersionViewHolder extends RecyclerView.ViewHolder{
         private final AndroidVersionsItemBinding itemBinding;
-
-        public AndoidVersionViewHolder(AndroidVersionsItemBinding itemBinding) {
+        public AndroidVersionViewHolder(AndroidVersionsItemBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
         }

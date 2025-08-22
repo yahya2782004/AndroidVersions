@@ -16,7 +16,7 @@ import com.example.androidversions.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 
-import adapters.AndoidVersionAdapter;
+import adapters.AndroidVersionAdapter;
 import models.AndroidVersion;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,16 +33,20 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        //Prepare the data (the list of Android versions)
         ArrayList<AndroidVersion> androidVersionList = createData();
 
+        //Reference to RecyclerView from the layout
         final RecyclerView rvAndroidVersions = mainBinding.rvAndroidVersions;
 
+        //Set RecyclerView layout manager (vertical scrolling list)
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-   //   RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
+        //RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
         rvAndroidVersions.setLayoutManager(layoutManager);
 
-        AndoidVersionAdapter andoidVersionAdapter = new AndoidVersionAdapter(this, androidVersionList);
-        rvAndroidVersions.setAdapter(andoidVersionAdapter);
+        //Create adapter and attach it to RecyclerView
+        AndroidVersionAdapter androidVersionAdapter = new AndroidVersionAdapter(this, androidVersionList);
+        rvAndroidVersions.setAdapter(androidVersionAdapter);
 
         mainBinding.btnSort.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,46 +56,48 @@ public class MainActivity extends AppCompatActivity {
                     for (int j = 0; j < i; j++) {
                         String name2 = androidVersionList.get(j).getCodeName();
                         if (name1.compareToIgnoreCase(name2) < 0) {
-                            // swap the locations
+                            // Swap elements if they are out of order
                             AndroidVersion tempObject = androidVersionList.get(j);
                             androidVersionList.set(j, androidVersionList.get(i));
                             androidVersionList.set(i, tempObject);
                         }
                     }
                 }
-                andoidVersionAdapter.notifyDataSetChanged();
+                //Notify adapter that data has changed
+                androidVersionAdapter.notifyDataSetChanged();
             }
         });
 
     }
 
+    //Method to create a list of Android versions with images, code names, and version numbers
     private ArrayList<AndroidVersion> createData (){
 
         ArrayList<AndroidVersion> androidVersionList =new ArrayList<>();
 
         AndroidVersion androidVersion3 = new AndroidVersion();
         androidVersion3.setImageResId(R.drawable.ic_froyo);
-        androidVersion3.setCodeName("Froyo");
-        androidVersion3.setVersion("2.2 – 2.2.3");
+        androidVersion3.setCodeName(getString(R.string.froyo));
+        androidVersion3.setVersion(getString(R.string.froyo_version));
         androidVersionList.add(androidVersion3);
 
-        AndroidVersion androidVersion1 = new AndroidVersion(R.drawable.ic_donut, "Donut", "1.6");
+        AndroidVersion androidVersion1 = new AndroidVersion(R.drawable.ic_donut, getString(R.string.donut), getString(R.string.donut_version));
         androidVersionList.add(androidVersion1);
 
-        androidVersionList.add(new AndroidVersion(R.drawable.ic_eclair, "Eclair", "2.0 – 2.1"));
+        androidVersionList.add(new AndroidVersion(R.drawable.ic_eclair, getString(R.string.eclair), getString(R.string.eclair_version)));
 
-        androidVersionList.add(new AndroidVersion(R.drawable.ic_cream_sandwich, "Ice Cream Sandwich", "4.0 – 4.0.4"));
+        androidVersionList.add(new AndroidVersion(R.drawable.ic_cream_sandwich, getString(R.string.ice_cream_sandwich), getString(R.string.ice_cream_version)));
 
-        androidVersionList.add(new AndroidVersion(R.drawable.ic_honeycomb, "Honeycomb", "3.0 – 3.2.6"));
-        androidVersionList.add(new AndroidVersion(R.drawable.ic_jellybean, "Jelly Bean", "4.1 – 4.3.1"));
-        androidVersionList.add(new AndroidVersion(R.drawable.ic_kitkat, "KitKat", "4.4 – 4.4.4"));
-        androidVersionList.add(new AndroidVersion(R.drawable.ic_lollipop, "Lollipop", "5.0 – 5.1.1"));
-        androidVersionList.add(new AndroidVersion(R.drawable.ic_gingerbread, "Gingerbread", "2.3 – 2.3.7"));
+        androidVersionList.add(new AndroidVersion(R.drawable.ic_honeycomb, getString(R.string.honeycomb), getString(R.string.honeycomb_version)));
+        androidVersionList.add(new AndroidVersion(R.drawable.ic_jellybean, getString(R.string.jelly_bean), getString(R.string.jelly_bean_version)));
+        androidVersionList.add(new AndroidVersion(R.drawable.ic_kitkat, getString(R.string.kitkat), getString(R.string.kitkat_version)));
+        androidVersionList.add(new AndroidVersion(R.drawable.ic_lollipop, getString(R.string.lollipop), getString(R.string.lollipop_version)));
+        androidVersionList.add(new AndroidVersion(R.drawable.ic_gingerbread, getString(R.string.gingerbread), getString(R.string.gingerbread_version)));
 
-        androidVersionList.add(new AndroidVersion(R.drawable.ic_nougat, "Nougat", "7.0 – 7.1.2"));
-        androidVersionList.add(new AndroidVersion(R.drawable.ic_oreo, "Oreo", "8.0 – 8.1"));
+        androidVersionList.add(new AndroidVersion(R.drawable.ic_nougat, getString(R.string.nougat), getString(R.string.nougat_version)));
+        androidVersionList.add(new AndroidVersion(R.drawable.ic_oreo, getString(R.string.oreo), getString(R.string.oreo_version)));
 
-        androidVersionList.add(new AndroidVersion(R.drawable.ic_marshmallow, "Marshmallow", "6.0 – 6.0.1"));
+        androidVersionList.add(new AndroidVersion(R.drawable.ic_marshmallow, getString(R.string.marshmallow), getString(R.string.marshmallow_version)));
 
 
         return androidVersionList;
